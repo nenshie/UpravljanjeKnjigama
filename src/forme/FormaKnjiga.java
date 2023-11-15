@@ -181,12 +181,21 @@ private Knjiga knjigaZaIzmenu;
     private void jButtonDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDodajActionPerformed
         
         String naziv = jTextFieldNaziv.getText();
-            String isbn = jTextFieldISBN.getText();
+        if(naziv == null || naziv.isEmpty() || naziv.trim().length()< 3){
+         JOptionPane.showMessageDialog(this, "Greska", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String isbn = jTextFieldISBN.getText();
         int godIzdanja = 0;
         try{ 
          godIzdanja = Integer.parseInt(jTextFieldGodinaIzadnja.getText());
+         if(godIzdanja < 1600 || godIzdanja > 2023){
+         JOptionPane.showMessageDialog(this, "Greska", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+         }
         } catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Godina izdanja mora biri broj", "Greska", JOptionPane.WARNING_MESSAGE);
+            return;
         }
         Zanr zanr = (Zanr)jComboBoxZanr.getSelectedItem();
         Autor autor = (Autor)jComboBoxAutori.getSelectedItem();
